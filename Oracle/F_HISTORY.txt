@@ -1,0 +1,51 @@
+-- Create table
+create table F_HISTORY
+(
+  HISTORYID     NUMBER not null,
+  HISTORYDATE   VARCHAR2(60) not null,
+  HISTORYCOM  VARCHAR2(60) not null,
+  HISTORYRESULT VARCHAR2(10) not null,
+  USERID        NUMBER
+)
+tablespace USERS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    minextents 1
+    maxextents unlimited
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table F_HISTORY
+  add constraint PK_HISTORYID primary key (HISTORYID)
+  using index 
+  tablespace USERS
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    minextents 1
+    maxextents unlimited
+  );
+alter table F_HISTORY
+  add constraint FK_USERID foreign key (USERID)
+  references F_USER (USERID);
+
+
+
+insert into F_History(HISTORYID,HISTORYDATE,HISTORYCOM,HISTORYRESULT,USERID)values(1,'2017-07-29 12:59','郭富城','赢',1);
+insert into F_History(HISTORYID,HISTORYDATE,HISTORYCOM,HISTORYRESULT,USERID)values(2,'2017-07-29 12:59','郭富城','输',1);
+insert into F_History(HISTORYID,HISTORYDATE,HISTORYCOM,HISTORYRESULT,USERID)values(3,'2017-07-29 12:59','郭富城','平',1);
+insert into F_History(HISTORYID,HISTORYDATE,HISTORYCOM,HISTORYRESULT,USERID)values(4,'2017-07-29 12:59','刘德华','输',2);
+insert into F_History(HISTORYID,HISTORYDATE,HISTORYCOM,HISTORYRESULT,USERID)values(5,'2017-07-29 12:59','刘德华','赢',2);
+insert into F_History(HISTORYID,HISTORYDATE,HISTORYCOM,HISTORYRESULT,USERID)values(6,'2017-07-29 12:59','刘德华','平',2);
+insert into F_History(HISTORYID,HISTORYDATE,HISTORYCOM,HISTORYRESULT,USERID)values(7,'2017-07-29 12:59','张学友','赢',3);
+insert into F_History(HISTORYID,HISTORYDATE,HISTORYCOM,HISTORYRESULT,USERID)values(8,'2017-07-29 12:59','张学友','赢',3);
+insert into F_History(HISTORYID,HISTORYDATE,HISTORYCOM,HISTORYRESULT,USERID)values(9,'2017-07-29 12:59','张学友','赢',3);
+insert into F_History(HISTORYID,HISTORYDATE,HISTORYCOM,HISTORYRESULT,USERID)values(10,'2017-07-29 12:59','周星驰','输',4);
+insert into F_History(HISTORYID,HISTORYDATE,HISTORYCOM,HISTORYRESULT,USERID)values(11,'2017-07-29 12:59','周星驰','输',4);
+insert into F_History(HISTORYID,HISTORYDATE,HISTORYCOM,HISTORYRESULT,USERID)values(12,'2017-07-29 12:59','周星驰','输',4);

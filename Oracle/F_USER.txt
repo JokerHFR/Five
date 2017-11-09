@@ -1,0 +1,62 @@
+-- Create table
+create table F_USER
+(
+  USERID     NUMBER not null,
+  USERNAME   VARCHAR2(60) not null,
+  USERWORD   VARCHAR2(60) not null,
+  USERGRADES NUMBER not null,
+  USERSTATE  NUMBER not null,
+  USERNUM    VARCHAR2(60) not null,
+  WIN        NUMBER,
+  SHU        NUMBER
+)
+tablespace USERS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    minextents 1
+    maxextents unlimited
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table F_USER
+  add constraint PK_USERID primary key (USERID)
+  using index 
+  tablespace USERS
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    minextents 1
+    maxextents unlimited
+  );
+
+
+insert into F_User(USERID,USERNAME,USERWORD,USERGRADES,USERSTATE,USERNUM,WIN,SHU )values(1,'刘德华','123',120,0,'king',20,3);
+insert into F_User(USERID,USERNAME,USERWORD,USERGRADES,USERSTATE,USERNUM,WIN,SHU )values(2,'郭富城','1234',100,0,'jack',20,10);
+insert into F_User(USERID,USERNAME,USERWORD,USERGRADES,USERSTATE,USERNUM,WIN,SHU )values(3,'周星驰','12345',200,0,'ben',20,11);
+insert into F_User(USERID,USERNAME,USERWORD,USERGRADES,USERSTATE,USERNUM,WIN,SHU )values(4,'张学友','123456',150,0,'bob',20,20);
+
+
+
+
+
+-- Create sequence 
+create sequence F_HISTORY_SEQ
+minvalue 1
+maxvalue 999999999999999999999999999
+start with 13
+increment by 1
+cache 20
+nocycle;
+
+create or replace trigger f_history_PK_insert
+before insert on f_history
+for each row 
+begin
+select f_history_seq.nextval into:new.historyid from dual;
+end;
